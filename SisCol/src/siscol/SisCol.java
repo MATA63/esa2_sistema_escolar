@@ -5,10 +5,12 @@
  */
 package siscol;
 
+import javax.swing.JFrame;
 import siscol.persistencia.model.Aluno;
 import siscol.persistencia.model.Disciplina;
 import siscol.persistencia.model.Funcionario;
 import siscol.persistencia.model.Professor;
+import siscol.ui.MainJFrame;
 
 /**
  *
@@ -57,6 +59,12 @@ public class SisCol {
 		func.Endereco = "Rua C";
 		func.RG = 1234456;
 		func.Cargo = "Auxiliar administrativo";
+                
+                MainJFrame mjf = new MainJFrame("SisCol - Sistema Escolar");
+                mjf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                mjf.pack();
+                JFrame.setDefaultLookAndFeelDecorated(true);
+                mjf.setVisible(true);
     }
     
 }
