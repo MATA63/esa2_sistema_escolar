@@ -39,6 +39,7 @@ public class MainJFrame extends javax.swing.JFrame {
         rgTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         alunoTable = new javax.swing.JTable();
+        alunoBtnSalvar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         cadastroMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -89,6 +90,8 @@ public class MainJFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(alunoTable);
 
+        alunoBtnSalvar.setText("Salvar");
+
         alunoPanel.setVisible(false);
 
         javax.swing.GroupLayout alunoPanelLayout = new javax.swing.GroupLayout(alunoPanel);
@@ -96,23 +99,24 @@ public class MainJFrame extends javax.swing.JFrame {
         alunoPanelLayout.setHorizontalGroup(
             alunoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(alunoPanelLayout.createSequentialGroup()
-                .addGroup(alunoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(alunoPanelLayout.createSequentialGroup()
-                        .addGroup(alunoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(alunoPanelLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(nomeLabel))
-                            .addComponent(matriculaLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(alunoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(alunoPanelLayout.createSequentialGroup()
-                                .addComponent(matriculaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(RG)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rgTextField))
-                            .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(alunoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(alunoBtnSalvar)
+                    .addGroup(alunoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(alunoPanelLayout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addGroup(alunoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(nomeLabel)
+                                .addComponent(matriculaLabel))
+                            .addGap(7, 7, 7)
+                            .addGroup(alunoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(alunoPanelLayout.createSequentialGroup()
+                                    .addComponent(matriculaTextField)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(RG)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(rgTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         alunoPanelLayout.setVerticalGroup(
@@ -128,9 +132,11 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(matriculaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(RG)
                     .addComponent(rgTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(alunoBtnSalvar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         cadastroMenu.setText("Cadastro");
@@ -174,7 +180,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(alunoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(410, 410, 410))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,6 +213,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel RG;
+    private javax.swing.JButton alunoBtnSalvar;
     private javax.swing.JPanel alunoPanel;
     private javax.swing.JTable alunoTable;
     private javax.swing.JMenu cadastroMenu;
