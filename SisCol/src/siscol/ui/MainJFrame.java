@@ -1,4 +1,8 @@
 package siscol.ui;
+
+import siscol.interfaces.IPersistencia;
+import siscol.persistencia.model.Aluno;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,12 +15,14 @@ package siscol.ui;
  */
 public class MainJFrame extends javax.swing.JFrame {
 
+    private IPersistencia iPersistencia;
     /**
      * Creates new form MainJFrame
      * @param title
      */
-    public MainJFrame(String title) {
+    public MainJFrame(String title, IPersistencia iPersistencia) {
         super(title);
+        this.iPersistencia = iPersistencia;
         initComponents();
     }
 
@@ -91,6 +97,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(alunoTable);
 
         alunoBtnSalvar.setText("Salvar");
+        alunoBtnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alunoBtnSalvarActionPerformed(evt);
+            }
+        });
 
         alunoPanel.setVisible(false);
 
@@ -209,6 +220,14 @@ public class MainJFrame extends javax.swing.JFrame {
     private void matriculaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculaTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_matriculaTextFieldActionPerformed
+
+    private void alunoBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alunoBtnSalvarActionPerformed
+        Aluno aluno = new Aluno();
+        aluno.Nome = nomeTextField.getText();
+        aluno.RG = Integer.getInteger(rgTextField.getText());
+        aluno.Matricula = Integer.getInteger(matriculaTextField.getText());
+        iPersistencia.getAluno(aluno);
+    }//GEN-LAST:event_alunoBtnSalvarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
