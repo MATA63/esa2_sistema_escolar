@@ -1,5 +1,7 @@
 package siscol.ui;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import siscol.interfaces.IPersistencia;
 import siscol.persistencia.model.Aluno;
 
@@ -16,6 +18,8 @@ import siscol.persistencia.model.Aluno;
 public class MainJFrame extends javax.swing.JFrame {
 
     private IPersistencia iPersistencia;
+    public static final DefaultTableModel alunoDataModel = new DefaultTableModel();
+    
     /**
      * Creates new form MainJFrame
      * @param title
@@ -44,7 +48,7 @@ public class MainJFrame extends javax.swing.JFrame {
         matriculaTextField = new javax.swing.JTextField();
         rgTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        alunoTable = new javax.swing.JTable();
+        alunoTable = new javax.swing.JTable(alunoDataModel);
         alunoBtnSalvar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         cadastroMenu = new javax.swing.JMenu();
@@ -85,10 +89,6 @@ public class MainJFrame extends javax.swing.JFrame {
 
         alunoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
             },
             new String [] {
                 "Nome", "RG", "Matrícula"
@@ -224,9 +224,10 @@ public class MainJFrame extends javax.swing.JFrame {
     private void alunoBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alunoBtnSalvarActionPerformed
         Aluno aluno = new Aluno();
         aluno.Nome = nomeTextField.getText();
-        aluno.RG = Integer.getInteger(rgTextField.getText());
-        aluno.Matricula = Integer.getInteger(matriculaTextField.getText());
-        iPersistencia.getAluno(aluno);
+        aluno.RG = rgTextField.getText();
+        aluno.Matricula = matriculaTextField.getText();
+        iPersistencia.setAluno(aluno);
+
     }//GEN-LAST:event_alunoBtnSalvarActionPerformed
 
 

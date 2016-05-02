@@ -35,21 +35,26 @@ public class SisCol{
     private static void open() {
         iPersistencia = new IPersistencia() {
             @Override
-            public void getAluno(Aluno aluno) {
+            public void setAluno(Aluno aluno) {
                 alunoList.add(aluno);
-                System.out.print(aluno.Nome);
+                Aluno.buildTableModel(alunoList, MainJFrame.alunoDataModel);
             }
 
             @Override
-            public void getDiretor(Diretor diretor) {
+            public void setDiretor(Diretor diretor) {
             }
 
             @Override
-            public void getFuncionario(Funcionario funcionario) {
+            public void setFuncionario(Funcionario funcionario) {
             }
 
             @Override
-            public void getProfessor(Professor professor) {
+            public void setProfessor(Professor professor) {
+            }
+
+            @Override
+            public List<Aluno> getAlunoList() {
+                return alunoList;
             }
         };
         

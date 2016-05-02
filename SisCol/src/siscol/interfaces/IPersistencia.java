@@ -5,6 +5,7 @@
  */
 package siscol.interfaces;
 
+import java.util.List;
 import siscol.persistencia.model.Aluno;
 import siscol.persistencia.model.Diretor;
 import siscol.persistencia.model.Funcionario;
@@ -16,9 +17,10 @@ import siscol.persistencia.model.Professor;
  */
 public interface IPersistencia {
     
-    public void getAluno(Aluno aluno);
-    public void getDiretor(Diretor diretor);
-    public void getFuncionario(Funcionario funcionario);
-    public void getProfessor(Professor professor);
+    public void setAluno(Aluno aluno);
+    public void setDiretor(Diretor diretor);
+    public void setFuncionario(Funcionario funcionario);
+    public void setProfessor(Professor professor);
+    public List<Aluno> getAlunoList();
     
 }
