@@ -2,7 +2,9 @@ package siscol.esa2.siscol.persistencia;
 
 import com.orm.SugarRecord;
 
-public class Funcionario extends SugarRecord {
+import java.io.Serializable;
+
+public class Funcionario extends SugarRecord implements Serializable {
 	
 	public String Nome;
 	public int RG;

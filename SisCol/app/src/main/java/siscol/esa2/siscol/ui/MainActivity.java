@@ -3,6 +3,8 @@ package siscol.esa2.siscol.ui;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -75,29 +77,36 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
+        selectFragment(id);
+        FloatingActionButton fabAdd = (FloatingActionButton) findViewById(R.id.fab);
+        fabAdd.setVisibility(FloatingActionButton.GONE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void selectFragment(int id) {
+        Fragment fragment = null;
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        //Switch case that decides what screen is going to appear.
+        switch (id) {
+            case R.id.nav_aluno:
+                fragment = new CadastroAlunoFragment();
+                toolbar.setTitle("Aluno");
+                break;
+        }
+        if (fragment != null)
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+    }
+
+
 }
