@@ -1,6 +1,7 @@
 package siscol.esa2.siscol.ui;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import com.orm.SugarRecord;
 
 import java.util.List;
 
+import siscol.esa2.siscol.R;
 import siscol.esa2.siscol.persistencia.Aluno;
 import siscol.esa2.siscol.ui.adapters.AlunoAdapter;
 

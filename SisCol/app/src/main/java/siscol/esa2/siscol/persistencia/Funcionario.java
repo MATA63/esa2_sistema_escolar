@@ -11,6 +11,7 @@ public class Funcionario extends SugarRecord implements Serializable {
 	public String Endereco;
 	public String Cargo;
 
+	public Funcionario(){}
 
 	public void cadastrarAluno(){
 		System.out.println();

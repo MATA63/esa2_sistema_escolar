@@ -12,4 +12,12 @@
     <string name="funcionario">Funcionario</string>
     <string name="notas">Notas</string>
     <string name="cadastro">Cadastro</string>
+    <string name="nome">Nome</string>
+    <string name="rg">RG</string>
+    <string name="serie">Serie</string>
+    <string name="matricula">Matricula</string>
+    <string name="Disciplina">Disciplina</string>
+    <string name="title_activity_aluno">AlunoActivity</string>
+    <string name="salvar">Salvar</string>
+    <string name="salvo">Salvo com sucesso!</string>
 </resources>

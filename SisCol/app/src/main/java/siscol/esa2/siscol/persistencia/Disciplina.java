@@ -10,5 +10,7 @@ public class Disciplina extends SugarRecord implements Serializable {
 	public int Turma;
 	public int qtdTotalAlunos;
 	public Professor professor;
+
+	public Disciplina(){}
 }
 

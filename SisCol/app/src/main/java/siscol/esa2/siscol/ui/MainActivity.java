@@ -1,12 +1,11 @@
 package siscol.esa2.siscol.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import siscol.esa2.siscol.R;
 
@@ -27,12 +27,16 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fabAd = (FloatingActionButton) findViewById(R.id.fab);
+        fabAd.setVisibility(FloatingActionButton.GONE);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_add);
+        assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, AlunoActivity.class);
+                MainActivity.this.startActivity(intent);
             }
         });
 
@@ -77,6 +81,7 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -84,7 +89,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         selectFragment(id);
-        FloatingActionButton fabAdd = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fabAdd = (FloatingActionButton) findViewById(R.id.fab_add);
         fabAdd.setVisibility(FloatingActionButton.GONE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

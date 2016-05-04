@@ -11,6 +11,7 @@ public class Diretor extends SugarRecord implements Serializable {
 	public String Endereco;
 	public String Cargo;
 
+	public Diretor(){}
 
 
 	public void cadastrarDireto(){

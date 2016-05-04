@@ -13,6 +13,7 @@ public class Professor extends SugarRecord implements Serializable {
 	public Disciplina disciplina;
 	public String Cargo;
 
+	public Professor(){}
 
 	public void verListaAluno(){
 		System.out.println();

@@ -12,6 +12,8 @@ public class Aluno extends SugarRecord implements Serializable{
 	public Disciplina disciplina;
 	public String Matricula;
 
+	public Aluno(){}
+
 }
 
 
