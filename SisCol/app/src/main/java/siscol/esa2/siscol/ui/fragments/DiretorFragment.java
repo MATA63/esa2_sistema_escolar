@@ -1,7 +1,6 @@
-package siscol.esa2.siscol.ui;
+package siscol.esa2.siscol.ui.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,29 +10,28 @@ import com.orm.SugarRecord;
 
 import java.util.List;
 
-import siscol.esa2.siscol.R;
-import siscol.esa2.siscol.persistencia.Aluno;
-import siscol.esa2.siscol.ui.adapters.AlunoAdapter;
+import siscol.esa2.siscol.persistencia.Diretor;
+import siscol.esa2.siscol.ui.adapters.DiretorAdapter;
 
 /**
  *
  * Created by tiago on 5/2/16.
  */
-public class CadastroAlunoFragment extends ListFragment {
+public class DiretorFragment extends ListFragment {
     @Override
     public void buildInOnCreate() {
         createList();
-        super.adapter = new AlunoAdapter(this.getContext(), (List<Aluno>) (List<?>) super.modelList);
+        super.adapter = new DiretorAdapter(this.getContext(), (List<Diretor>) (List<?>) super.modelList);
     }
 
     @Override
     public void createList() {
-        super.modelList = (List<SugarRecord>) (List<?>) Aluno.listAll(Aluno.class);
+        super.modelList = (List<SugarRecord>) (List<?>) Diretor.listAll(Diretor.class);
     }
 
     @Override
     public void updateAdapter() {
-        super.adapter = new AlunoAdapter(this.getContext(), (List<Aluno>) (List<?>) super.modelList);
+        super.adapter = new DiretorAdapter(this.getContext(), (List<Diretor>) (List<?>) super.modelList);
         listView.setAdapter(adapter);
     }
 

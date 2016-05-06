@@ -20,4 +20,5 @@
     <string name="title_activity_aluno">AlunoActivity</string>
     <string name="salvar">Salvar</string>
     <string name="salvo">Salvo com sucesso!</string>
+    <string name="frequencia">Frequencia</string>
 </resources>

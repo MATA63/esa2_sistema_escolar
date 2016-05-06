@@ -1,4 +1,4 @@
-package siscol.esa2.siscol.ui;
+package siscol.esa2.siscol.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 import siscol.esa2.siscol.R;
+import siscol.esa2.siscol.ui.fragments.AlunoFragment;
+import siscol.esa2.siscol.ui.fragments.DiretorFragment;
+import siscol.esa2.siscol.ui.fragments.FuncionarioFragment;
+import siscol.esa2.siscol.ui.fragments.ProfessorFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,6 +36,7 @@ public class MainActivity extends AppCompatActivity
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_add);
         assert fab != null;
+        fab.setVisibility(FloatingActionButton.VISIBLE);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,8 +110,20 @@ public class MainActivity extends AppCompatActivity
         //Switch case that decides what screen is going to appear.
         switch (id) {
             case R.id.nav_aluno:
-                fragment = new CadastroAlunoFragment();
+                fragment = new AlunoFragment();
                 toolbar.setTitle("Aluno");
+                break;
+            case R.id.nav_professor:
+                fragment = new ProfessorFragment();
+                toolbar.setTitle("Professor");
+                break;
+            case R.id.nav_diretor:
+                fragment = new DiretorFragment();
+                toolbar.setTitle("Diretor");
+                break;
+            case R.id.nav_funcionario:
+                fragment = new FuncionarioFragment();
+                toolbar.setTitle("Funcionario");
                 break;
         }
         if (fragment != null)

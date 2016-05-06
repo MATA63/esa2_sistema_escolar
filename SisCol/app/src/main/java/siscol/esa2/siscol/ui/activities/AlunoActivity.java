@@ -1,4 +1,4 @@
-package siscol.esa2.siscol.ui;
+package siscol.esa2.siscol.ui.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +23,7 @@ public class AlunoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aluno_new);
+        setContentView(R.layout.activity_aluno);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

@@ -1,4 +1,4 @@
-package siscol.esa2.siscol.ui;
+package siscol.esa2.siscol.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
