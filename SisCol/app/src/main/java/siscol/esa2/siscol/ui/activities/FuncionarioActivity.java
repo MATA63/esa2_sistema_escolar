@@ -10,15 +10,13 @@ import android.widget.Toast;
 
 import siscol.esa2.siscol.R;
 import siscol.esa2.siscol.persistencia.Funcionario;
-import siscol.esa2.siscol.persistencia.Professor;
+import siscol.esa2.siscol.ui.fragments.ListFragment;
 
 public class FuncionarioActivity extends AppCompatActivity {
 
     private EditText editTextNome;
     private EditText editTextRG;
-    private EditText editTextSerie;
-    private EditText editTextDisciplina;
-    private EditText editTextMatricula;
+    private EditText editTextEndereco;
     private Funcionario funcionario;
 
     @Override
@@ -30,9 +28,16 @@ public class FuncionarioActivity extends AppCompatActivity {
 
         editTextNome = (EditText) findViewById(R.id.edt_txt_value_nome);
         editTextRG = (EditText) findViewById(R.id.edt_txt_value_rg);
-        editTextSerie = (EditText) findViewById(R.id.edt_txt_value_serie);
-        editTextDisciplina = (EditText) findViewById(R.id.edt_txt_value_disciplina);
-        editTextMatricula = (EditText) findViewById(R.id.edt_txt_value_matricula);
+        editTextEndereco = (EditText) findViewById(R.id.edt_txt_value_endereco);
+
+        if (getIntent().getExtras() != null && getIntent().getExtras().get(ListFragment.MODEL) != null)
+            funcionario = (Funcionario) getIntent().getExtras().get(ListFragment.MODEL);
+
+        if (funcionario != null) {
+            editTextNome.setText(funcionario.Nome);
+            editTextEndereco.setText(funcionario.Endereco);
+            editTextRG.setText(funcionario.RG);
+        }
 
         lock_unlock();
 
@@ -43,16 +48,12 @@ public class FuncionarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 funcionario = new Funcionario();
-                if(funcionario !=null){
+                if (funcionario != null) {
                     funcionario.Nome = editTextNome.getText().toString();
-//                    professor.RG = editTextRG.getText().toString();
-//                    professor.Serie = editTextSerie.getText().toString();
-////                    professor.disciplina = editTextDisciplina.getText().toString();
-//                    professor.Matricula = editTextMatricula.getText().toString();
-                    if(funcionario.save()>0)
-                        Toast.makeText(getApplicationContext(),getString(R.string.salvo),Toast.LENGTH_SHORT).show();
-
-
+                    funcionario.RG = editTextRG.getText().toString();
+                    funcionario.Endereco = editTextEndereco.getText().toString();
+                    if (funcionario.save() > 0)
+                        Toast.makeText(getApplicationContext(), getString(R.string.salvo), Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -64,8 +65,6 @@ public class FuncionarioActivity extends AppCompatActivity {
     private void lock_unlock() {
         editTextNome.setEnabled(!editTextNome.isEnabled());
         editTextRG.setEnabled(!editTextRG.isEnabled());
-        editTextSerie.setEnabled(!editTextSerie.isEnabled());
-        editTextDisciplina.setEnabled(!editTextDisciplina.isEnabled());
-        editTextMatricula.setEnabled(!editTextMatricula.isEnabled());
+        editTextEndereco.setEnabled(!editTextEndereco.isEnabled());
     }
 }

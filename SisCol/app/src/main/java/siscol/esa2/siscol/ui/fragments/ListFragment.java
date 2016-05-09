@@ -2,7 +2,9 @@ package siscol.esa2.siscol.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +25,7 @@ import siscol.esa2.siscol.R;
  *
  * @author tiagogoncalves
  */
-public abstract class ListFragment extends Fragment implements AdapterView.OnItemClickListener {
+public abstract class ListFragment extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener, EditDeleteDialogFragment.OnEditRemoveItem {
 
     public static final String MODEL = "model";
 
@@ -32,6 +34,8 @@ public abstract class ListFragment extends Fragment implements AdapterView.OnIte
     public Intent intent;
 
     public ListView listView;
+    protected FloatingActionButton fab;
+    private EditDeleteDialogFragment editDeleteDialogFragment;
 
 
     public abstract void buildInOnCreate();
@@ -47,7 +51,13 @@ public abstract class ListFragment extends Fragment implements AdapterView.OnIte
 
         listView = (ListView) view.findViewById(R.id.list_view);
         listView.setVisibility(ListView.VISIBLE);
+
+        fab = (FloatingActionButton) view.findViewById(R.id.fab_add);
+        
         buildInOnCreate();
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(ListFragment.this);
+        listView.setOnItemLongClickListener(ListFragment.this);
         return view;
     }
 
@@ -67,6 +77,18 @@ public abstract class ListFragment extends Fragment implements AdapterView.OnIte
             startActivityForResult(intent, 0);
         }
     }
+
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            editDeleteDialogFragment = new EditDeleteDialogFragment();
+            FragmentManager fm = ListFragment.this.getFragmentManager();
+            editDeleteDialogFragment.setOnEditRemoveItem(ListFragment.this);
+            Bundle b = new Bundle();
+            b.putInt(EditDeleteDialogFragment.MODEL_POS, position);
+            editDeleteDialogFragment.setArguments(b);
+            editDeleteDialogFragment.show(fm, "editDeleteDialogFragment");
+            return true;
+        }
 
     /**
      * Updating a particular item inside the list.
@@ -92,6 +114,27 @@ public abstract class ListFragment extends Fragment implements AdapterView.OnIte
             if (b.getSerializable(ListFragment.MODEL) != null) {
                 updateModelList((SugarRecord) b.getSerializable(ListFragment.MODEL));
                 updateAdapter();
+            }
+        }
+    }
+
+    @Override
+    public void onEdit(int position) {
+        if (intent != null) {
+            Bundle b = new Bundle();
+            b.putSerializable(MODEL, (Serializable) modelList.get(position));
+            intent.putExtras(b);
+            startActivityForResult(intent, 0);
+        }
+    }
+
+    @Override
+    public void onRemove(int position) {
+        if (editDeleteDialogFragment != null) editDeleteDialogFragment.dismiss();
+        if (modelList.get(position) != null) {
+            if (modelList.get(position).delete()) {
+                modelList.remove(position);
+                adapter.notifyDataSetChanged();
             }
         }
     }

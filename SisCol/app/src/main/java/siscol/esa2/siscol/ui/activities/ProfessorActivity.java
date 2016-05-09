@@ -9,16 +9,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import siscol.esa2.siscol.R;
-import siscol.esa2.siscol.persistencia.Aluno;
+import siscol.esa2.siscol.persistencia.Diretor;
 import siscol.esa2.siscol.persistencia.Professor;
+import siscol.esa2.siscol.ui.fragments.ListFragment;
 
 public class ProfessorActivity extends AppCompatActivity {
 
     private EditText editTextNome;
     private EditText editTextRG;
-    private EditText editTextSerie;
-    private EditText editTextDisciplina;
-    private EditText editTextMatricula;
+    private EditText editTextEndereco;
+    private EditText editTextTitulacao;
     private Professor professor;
 
     @Override
@@ -30,9 +30,19 @@ public class ProfessorActivity extends AppCompatActivity {
 
         editTextNome = (EditText) findViewById(R.id.edt_txt_value_nome);
         editTextRG = (EditText) findViewById(R.id.edt_txt_value_rg);
-        editTextSerie = (EditText) findViewById(R.id.edt_txt_value_serie);
-        editTextDisciplina = (EditText) findViewById(R.id.edt_txt_value_disciplina);
-        editTextMatricula = (EditText) findViewById(R.id.edt_txt_value_matricula);
+        editTextEndereco = (EditText) findViewById(R.id.edt_txt_value_serie);
+        editTextTitulacao = (EditText) findViewById(R.id.edt_txt_value_disciplina);
+
+
+        if (getIntent().getExtras() != null && getIntent().getExtras().get(ListFragment.MODEL) != null)
+            professor = (Professor) getIntent().getExtras().get(ListFragment.MODEL);
+
+        if (professor != null) {
+            editTextNome.setText(professor.Nome);
+            editTextEndereco.setText(professor.Endereco);
+            editTextRG.setText(professor.RG);
+            editTextTitulacao.setText(professor.Titulacao);
+        }
 
         lock_unlock();
 
@@ -45,10 +55,9 @@ public class ProfessorActivity extends AppCompatActivity {
                 professor = new Professor();
                 if(professor !=null){
                     professor.Nome = editTextNome.getText().toString();
-//                    professor.RG = editTextRG.getText().toString();
-//                    professor.Serie = editTextSerie.getText().toString();
-////                    professor.disciplina = editTextDisciplina.getText().toString();
-//                    professor.Matricula = editTextMatricula.getText().toString();
+                    professor.RG = editTextRG.getText().toString();
+                    professor.Endereco = editTextEndereco.getText().toString();
+                    professor.Titulacao = editTextTitulacao.getText().toString();
                     if(professor.save()>0)
                         Toast.makeText(getApplicationContext(),getString(R.string.salvo),Toast.LENGTH_SHORT).show();
 
@@ -64,8 +73,7 @@ public class ProfessorActivity extends AppCompatActivity {
     private void lock_unlock() {
         editTextNome.setEnabled(!editTextNome.isEnabled());
         editTextRG.setEnabled(!editTextRG.isEnabled());
-        editTextSerie.setEnabled(!editTextSerie.isEnabled());
-        editTextDisciplina.setEnabled(!editTextDisciplina.isEnabled());
-        editTextMatricula.setEnabled(!editTextMatricula.isEnabled());
+        editTextEndereco.setEnabled(!editTextEndereco.isEnabled());
+        editTextTitulacao.setEnabled(!editTextTitulacao.isEnabled());
     }
 }

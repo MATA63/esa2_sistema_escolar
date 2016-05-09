@@ -21,4 +21,6 @@
     <string name="salvar">Salvar</string>
     <string name="salvo">Salvo com sucesso!</string>
     <string name="frequencia">Frequencia</string>
+    <string name="delete">Remover</string>
+    <string name="edit">Editar</string>
 </resources>

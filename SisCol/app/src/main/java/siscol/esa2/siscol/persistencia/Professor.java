@@ -7,31 +7,13 @@ import java.io.Serializable;
 public class Professor extends SugarRecord implements Serializable {
 	
 	public String Nome;
-	public int RG;
+	public String RG;
 	public String Endereco;
 	public String Titulacao;
 	public Disciplina disciplina;
 	public String Cargo;
 
 	public Professor(){}
-
-	public void verListaAluno(){
-		System.out.println();
-	}
-
-
-	public void verListaProfessor(){
-		System.out.println();
-	}
-
-	public void alterarNotas(){
-		System.out.println();
-	}
-
-
-	public void acessarFrequencia(){
-		System.out.println();
-	}
 
 
 }

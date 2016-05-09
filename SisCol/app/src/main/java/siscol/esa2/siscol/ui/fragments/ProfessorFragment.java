@@ -1,6 +1,8 @@
 package siscol.esa2.siscol.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +12,9 @@ import com.orm.SugarRecord;
 
 import java.util.List;
 
-import siscol.esa2.siscol.persistencia.Aluno;
 import siscol.esa2.siscol.persistencia.Professor;
-import siscol.esa2.siscol.ui.adapters.AlunoAdapter;
+import siscol.esa2.siscol.ui.activities.AlunoActivity;
+import siscol.esa2.siscol.ui.activities.ProfessorActivity;
 import siscol.esa2.siscol.ui.adapters.ProfessorAdapter;
 
 /**
@@ -24,6 +26,15 @@ public class ProfessorFragment extends ListFragment {
     public void buildInOnCreate() {
         createList();
         super.adapter = new ProfessorAdapter(this.getContext(), (List<Professor>) (List<?>) super.modelList);
+        assert fab != null;
+        fab.setVisibility(FloatingActionButton.VISIBLE);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ProfessorActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -45,7 +56,13 @@ public class ProfessorFragment extends ListFragment {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        super.intent = new Intent(this.getActivity(), NewAluno.class);    // TODO: 5/2/16
+        super.intent = new Intent(this.getActivity(), ProfessorActivity.class);
         super.onItemClick(parent, view, position, id);
+    }
+
+    @Override
+    public void onEdit(int position) {
+        super.intent = new Intent(this.getActivity(), ProfessorActivity.class);
+        super.onEdit(position);
     }
 }

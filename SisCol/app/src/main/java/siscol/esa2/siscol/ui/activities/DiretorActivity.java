@@ -10,15 +10,13 @@ import android.widget.Toast;
 
 import siscol.esa2.siscol.R;
 import siscol.esa2.siscol.persistencia.Diretor;
-import siscol.esa2.siscol.persistencia.Professor;
+import siscol.esa2.siscol.ui.fragments.ListFragment;
 
 public class DiretorActivity extends AppCompatActivity {
 
     private EditText editTextNome;
     private EditText editTextRG;
-    private EditText editTextSerie;
-    private EditText editTextDisciplina;
-    private EditText editTextMatricula;
+    private EditText editTextEndereco;
     private Diretor diretor;
 
     @Override
@@ -30,9 +28,17 @@ public class DiretorActivity extends AppCompatActivity {
 
         editTextNome = (EditText) findViewById(R.id.edt_txt_value_nome);
         editTextRG = (EditText) findViewById(R.id.edt_txt_value_rg);
-        editTextSerie = (EditText) findViewById(R.id.edt_txt_value_serie);
-        editTextDisciplina = (EditText) findViewById(R.id.edt_txt_value_disciplina);
-        editTextMatricula = (EditText) findViewById(R.id.edt_txt_value_matricula);
+        editTextEndereco = (EditText) findViewById(R.id.edt_txt_value_endereco);
+
+        if (getIntent().getExtras() != null && getIntent().getExtras().get(ListFragment.MODEL) != null)
+            diretor = (Diretor) getIntent().getExtras().get(ListFragment.MODEL);
+
+        if (diretor != null) {
+            editTextNome.setText(diretor.Nome);
+            editTextEndereco.setText(diretor.Endereco);
+            editTextRG.setText(diretor.RG);
+        }
+
 
         lock_unlock();
 
@@ -43,15 +49,12 @@ public class DiretorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 diretor = new Diretor();
-                if(diretor !=null){
+                if (diretor != null) {
                     diretor.Nome = editTextNome.getText().toString();
-//                    diretor.RG = editTextRG.getText().toString();
-//                    diretor.Serie = editTextSerie.getText().toString();
-////                    diretor.disciplina = editTextDisciplina.getText().toString();
-//                    diretor.Matricula = editTextMatricula.getText().toString();
-                    if(diretor.save()>0)
-                        Toast.makeText(getApplicationContext(),getString(R.string.salvo),Toast.LENGTH_SHORT).show();
-
+                    diretor.RG = editTextRG.getText().toString();
+                    diretor.Endereco = editTextEndereco.getText().toString();
+                    if (diretor.save() > 0)
+                        Toast.makeText(getApplicationContext(), getString(R.string.salvo), Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -64,8 +67,6 @@ public class DiretorActivity extends AppCompatActivity {
     private void lock_unlock() {
         editTextNome.setEnabled(!editTextNome.isEnabled());
         editTextRG.setEnabled(!editTextRG.isEnabled());
-        editTextSerie.setEnabled(!editTextSerie.isEnabled());
-        editTextDisciplina.setEnabled(!editTextDisciplina.isEnabled());
-        editTextMatricula.setEnabled(!editTextMatricula.isEnabled());
+        editTextEndereco.setEnabled(!editTextEndereco.isEnabled());
     }
 }

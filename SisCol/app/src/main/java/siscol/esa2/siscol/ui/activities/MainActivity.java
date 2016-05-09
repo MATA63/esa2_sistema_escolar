@@ -34,16 +34,6 @@ public class MainActivity extends AppCompatActivity
         FloatingActionButton fabAd = (FloatingActionButton) findViewById(R.id.fab);
         fabAd.setVisibility(FloatingActionButton.GONE);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_add);
-        assert fab != null;
-        fab.setVisibility(FloatingActionButton.VISIBLE);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AlunoActivity.class);
-                MainActivity.this.startActivity(intent);
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -94,9 +84,6 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         selectFragment(id);
-        FloatingActionButton fabAdd = (FloatingActionButton) findViewById(R.id.fab_add);
-        fabAdd.setVisibility(FloatingActionButton.GONE);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

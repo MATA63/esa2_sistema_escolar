@@ -1,6 +1,8 @@
 package siscol.esa2.siscol.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import com.orm.SugarRecord;
 import java.util.List;
 
 import siscol.esa2.siscol.persistencia.Funcionario;
+import siscol.esa2.siscol.ui.activities.AlunoActivity;
+import siscol.esa2.siscol.ui.activities.FuncionarioActivity;
 import siscol.esa2.siscol.ui.adapters.FuncionarioAdapter;
 
 /**
@@ -22,6 +26,16 @@ public class FuncionarioFragment extends ListFragment {
     public void buildInOnCreate() {
         createList();
         super.adapter = new FuncionarioAdapter(this.getContext(), (List<Funcionario>) (List<?>) super.modelList);
+
+        assert fab != null;
+        fab.setVisibility(FloatingActionButton.VISIBLE);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), FuncionarioActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -43,7 +57,13 @@ public class FuncionarioFragment extends ListFragment {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        super.intent = new Intent(this.getActivity(), NewAluno.class);    // TODO: 5/2/16
+        super.intent = new Intent(this.getActivity(), FuncionarioActivity.class);
         super.onItemClick(parent, view, position, id);
+    }
+
+    @Override
+    public void onEdit(int position) {
+        super.intent = new Intent(this.getActivity(), FuncionarioActivity.class);
+        super.onEdit(position);
     }
 }

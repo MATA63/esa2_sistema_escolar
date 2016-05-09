@@ -10,13 +10,12 @@ import android.widget.Toast;
 
 import siscol.esa2.siscol.R;
 import siscol.esa2.siscol.persistencia.Aluno;
+import siscol.esa2.siscol.ui.fragments.ListFragment;
 
 public class AlunoActivity extends AppCompatActivity {
 
     private EditText editTextNome;
     private EditText editTextRG;
-    private EditText editTextSerie;
-    private EditText editTextDisciplina;
     private EditText editTextMatricula;
     private Aluno aluno;
 
@@ -29,9 +28,17 @@ public class AlunoActivity extends AppCompatActivity {
 
         editTextNome = (EditText) findViewById(R.id.edt_txt_value_nome);
         editTextRG = (EditText) findViewById(R.id.edt_txt_value_rg);
-        editTextSerie = (EditText) findViewById(R.id.edt_txt_value_serie);
-        editTextDisciplina = (EditText) findViewById(R.id.edt_txt_value_disciplina);
         editTextMatricula = (EditText) findViewById(R.id.edt_txt_value_matricula);
+
+        if (getIntent().getExtras() != null && getIntent().getExtras().get(ListFragment.MODEL) != null)
+            aluno = (Aluno) getIntent().getExtras().get(ListFragment.MODEL);
+
+        if(aluno!=null){
+            editTextNome.setText(aluno.Nome);
+            editTextMatricula.setText(aluno.Matricula);
+            editTextRG.setText(aluno.RG);
+        }
+
 
         lock_unlock();
 
@@ -45,7 +52,6 @@ public class AlunoActivity extends AppCompatActivity {
                 if(aluno!=null){
                     aluno.Nome = editTextNome.getText().toString();
                     aluno.RG = editTextRG.getText().toString();
-                    aluno.Serie = editTextSerie.getText().toString();
 //                    aluno.disciplina = editTextDisciplina.getText().toString();
                     aluno.Matricula = editTextMatricula.getText().toString();
                     if(aluno.save()>0)
@@ -63,8 +69,6 @@ public class AlunoActivity extends AppCompatActivity {
     private void lock_unlock() {
         editTextNome.setEnabled(!editTextNome.isEnabled());
         editTextRG.setEnabled(!editTextRG.isEnabled());
-        editTextSerie.setEnabled(!editTextSerie.isEnabled());
-        editTextDisciplina.setEnabled(!editTextDisciplina.isEnabled());
         editTextMatricula.setEnabled(!editTextMatricula.isEnabled());
     }
 }

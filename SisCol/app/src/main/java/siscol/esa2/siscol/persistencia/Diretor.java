@@ -7,40 +7,11 @@ import java.io.Serializable;
 public class Diretor extends SugarRecord implements Serializable {
 	
 	public String Nome;
-	public int RG;
+	public String RG;
 	public String Endereco;
 	public String Cargo;
 
 	public Diretor(){}
-
-
-	public void cadastrarDireto(){
-		System.out.println();
-	}
-
-
-	public void cadastrarProfessor(){
-		System.out.println();
-	}
-	
-	
-	public void cadastrarFuncionario(){
-		System.out.println();
-	}
-
-	
-	public void alterarvagas(){
-		System.out.println();
-	}
-
-	public void acessarFrequencia(){
-		System.out.println();
-	}
-
-
-	public void cadastrarSalas(){
-		System.out.println();
-	}
 
 
 }
