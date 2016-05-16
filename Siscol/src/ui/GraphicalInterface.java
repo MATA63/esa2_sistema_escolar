@@ -7,11 +7,30 @@ import java.util.List;
 
 import siscol.persistencia.Aluno;
 import siscol.persistencia.Diretor;
+import siscol.persistencia.Disciplina;
 import siscol.persistencia.Funcionario;
+import siscol.persistencia.Notas;
 import siscol.persistencia.Professor;
 import siscol.persistencia.helper.DBConn;
 
 public class GraphicalInterface {
+
+	private static final int OPT_LISTAR_ALUNO = 1;
+	private static final int OPT_CADASTRAR_ALUNO = 2;
+	private static final int OPT_REMOVER_ANULO = 3;
+	private static final int OPT_LISTAR_PROFESSORES = 4;
+	private static final int OPT_CADASTRAR_PROFESSOR = 5;
+	private static final int OPT_REMOVER_PROFESSOR = 6;
+	private static final int OPT_LISTAR_DIRETORES = 7;
+	private static final int OPT_CADASTRAR_DIRETOR = 8;
+	private static final int OPT_REMOVER_DIRETOR = 9;
+	private static final int OPT_LISTAR_FUNCIONARIO = 10;
+	private static final int OPT_CADASTRAR_FUNCIONARIO = 11;
+	private static final int OPT_REMOVER_FUNCIONARIO = 12;
+	private static final int OPT_LISTAR_DISCIPLINA = 13;
+	private static final int OPT_CADASTRAR_DISCIPLINA = 14;
+	private static final int OPT_LISTAR_NOTAS = 15;
+	private static final int OPT_LANCAR_NOTA = 16;
 
 	private static int opt;
 	private static DBConn conn;
@@ -22,24 +41,38 @@ public class GraphicalInterface {
 	}
 
 	public static void TelaPrincipal() {
-		System.out.println("SisCol - Sistema Escolar\n");
-		System.out.println("1.Listar alunos");
-		System.out.println("2.Cadastrar novo aluno");
-		System.out.println("3.listar professores");
-		System.out.println("4.Cadastrar novo professor");
-		System.out.println("5.Listar diretores");
-		System.out.println("6.Cadastrar novo diretor");
-		System.out.println("7.Listar funcionários");
-		System.out.println("8.Cadastrar novo funcionário");
+		System.out.println("SisCol - Sistema Escolar");
+		System.out.println("Alunos");
+		System.out.println("\t" + OPT_LISTAR_ALUNO + ".Listar alunos");
+		System.out.println("\t" + OPT_CADASTRAR_ALUNO + ".Cadastrar novo aluno");
+		System.out.println("\t" + OPT_REMOVER_ANULO + ".Remover aluno");
+		System.out.println("Professores");
+		System.out.println("\t" + OPT_LISTAR_PROFESSORES + ".listar professores");
+		System.out.println("\t" + OPT_CADASTRAR_PROFESSOR + ".Cadastrar novo professor");
+		System.out.println("\t" + OPT_REMOVER_PROFESSOR + ".Remover professor.");
+		System.out.println("Diretores");
+		System.out.println("\t" + OPT_LISTAR_DIRETORES + ".Listar diretores");
+		System.out.println("\t" + OPT_CADASTRAR_DIRETOR + ".Cadastrar novo diretor");
+		System.out.println("\t" + OPT_REMOVER_DIRETOR + ".Remover diretor");
+		System.out.println("Funcionários");
+		System.out.println("\t" + OPT_LISTAR_FUNCIONARIO + ".Listar funcionários");
+		System.out.println("\t" + OPT_CADASTRAR_FUNCIONARIO + ".Cadastrar novo funcionário");
+		System.out.println("\t" + OPT_REMOVER_FUNCIONARIO + ".Remover funcionário");
+		System.out.println("Disciplinas");
+		System.out.println("\t" + OPT_LISTAR_DISCIPLINA + ".Listar disciplinas.");
+		System.out.println("\t" + OPT_CADASTRAR_DISCIPLINA + ".Cadastrar nova disciplina.");
+		System.out.println("Notas");
+		System.out.println("\t" + OPT_LISTAR_NOTAS + ".Listar notas.");
+		System.out.println("\t" + OPT_LANCAR_NOTA + ".Lançar nota.");
 		opt = readInt();
 		selecionaOpcao();
 
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private static void selecionaOpcao() {
 		switch (opt) {
-		case 1:
+		case OPT_LISTAR_ALUNO:
 			List<Aluno> alunos = (List<Aluno>) (List<?>) Aluno.findAll(Aluno.class);
 			for (Aluno a : alunos)
 				System.out.println(a);
@@ -47,10 +80,14 @@ public class GraphicalInterface {
 			readStr();
 			TelaPrincipal();
 			break;
-		case 2:
+		case OPT_CADASTRAR_ALUNO:
 			TelaCadastrarAluno();
 			break;
-		case 3:
+		case OPT_REMOVER_ANULO:
+			TelaRemoverAluno();
+			break;
+
+		case OPT_LISTAR_PROFESSORES:
 			List<Professor> professores = (List<Professor>) (List<?>) Professor.findAll(Professor.class);
 			for (Professor p : professores)
 				System.out.println(p);
@@ -58,10 +95,13 @@ public class GraphicalInterface {
 			readStr();
 			TelaPrincipal();
 			break;
-		case 4:
+		case OPT_CADASTRAR_PROFESSOR:
 			TelaCadastrarProfessor();
 			break;
-		case 5:
+		case OPT_REMOVER_PROFESSOR:
+			TelaRemoverProfessor();
+			break;
+		case OPT_LISTAR_DIRETORES:
 			List<Diretor> diretores = (List<Diretor>) (List<?>) Diretor.findAll(Diretor.class);
 			for (Diretor diretor : diretores)
 				System.out.println(diretor);
@@ -69,20 +109,58 @@ public class GraphicalInterface {
 			readStr();
 			TelaPrincipal();
 			break;
-		case 6:
-			TelaCadastrarProfessor();
+		case OPT_CADASTRAR_DIRETOR:
+			TelaCadastrarDiretor();
 			break;
-		case 7:
+		case OPT_REMOVER_DIRETOR:
+			TelaRemoverDiretor();
+			break;
+		case OPT_LISTAR_FUNCIONARIO:
 			List<Funcionario> funcionarios = (List<Funcionario>) (List<?>) Funcionario.findAll(Funcionario.class);
-			for (Funcionario funcionario: funcionarios)
+			for (Funcionario funcionario : funcionarios)
 				System.out.println(funcionario);
 			System.out.println("Pressione qualquer tecla para continuar.");
 			readStr();
 			TelaPrincipal();
 			break;
-		case 8:
+		case OPT_CADASTRAR_FUNCIONARIO:
 			TelaCadastrarFuncionario();
 			break;
+		case OPT_REMOVER_FUNCIONARIO:
+			TelaRemoverFuncionario();
+			break;
+		case OPT_CADASTRAR_DISCIPLINA:
+			TelaCadastrarDisciplina();
+			break;
+		case OPT_LISTAR_DISCIPLINA:
+			List<Disciplina> disciplinas = (List<Disciplina>) (List<?>) Disciplina.findAll(Disciplina.class);
+			for (Disciplina disciplina : disciplinas)
+				System.out.println(disciplina);
+			System.out.println("Pressione qualquer tecla para continuar.");
+			readStr();
+			TelaPrincipal();
+			break;
+		case OPT_LISTAR_NOTAS:
+			System.out.println("Nome do aluno:");
+			List<Aluno> alunoLista = (List<Aluno>) (List<?>) Aluno.find(Aluno.class, "Nome", readStr());
+			if (alunoLista != null && alunoLista.size() != 0) {
+				List<Notas> notas = (List<Notas>) (List<?>) Notas.find(Notas.class, "aluno_id",
+						String.valueOf(alunoLista.get(0).id));
+				for (Notas nota : notas)
+					System.out.println(nota);
+				System.out.println("Pressione qualquer tecla para continuar.");
+				readStr();
+			} else {
+				System.out.println("Aluno não encontrado.");
+				System.out.println("Pressione qualquer tecla para continuar.");
+				readStr();
+			}
+			TelaPrincipal();
+			break;
+		case OPT_LANCAR_NOTA:
+			TelaLancarNota();
+			break;
+
 		default:
 			System.out.println("Opção inválida.");
 			System.out.println("Pressione qualquer tecla para continuar.");
@@ -93,6 +171,33 @@ public class GraphicalInterface {
 
 	}
 
+	private static void TelaLancarNota() {
+		System.out.println("Nome do aluno:");
+		List<Aluno> alunoLista = (List<Aluno>) (List<?>) Aluno.find(Aluno.class, "Nome", readStr());
+		if (alunoLista != null && alunoLista.size() != 0) {
+			System.out.println("Nome da disciplina:");
+			List<Disciplina> disciplinaLista = (List<Disciplina>) (List<?>) Disciplina.find(Disciplina.class, "Nome",
+					readStr());
+			if (disciplinaLista != null && disciplinaLista.size() != 0) {
+				Notas nota = new Notas();
+				nota.aluno = alunoLista.get(0);
+				nota.disciplina = disciplinaLista.get(0);
+				System.out.println("Valor:");
+				nota.valor = readInt();
+				nota.save(Notas.class);
+			} else {
+				System.out.println("Disciplina não encontrada.");
+				System.out.println("Pressione qualquer tecla para continuar.");
+				readStr();
+			}
+		} else {
+			System.out.println("Aluno não encontrado.");
+			System.out.println("Pressione qualquer tecla para continuar.");
+			readStr();
+		}
+		TelaPrincipal();
+
+	}
 
 	public static void TelaCadastrarAluno() {
 		Aluno aluno = new Aluno();
@@ -104,14 +209,93 @@ public class GraphicalInterface {
 		System.out.println("Matrícula:");
 		aluno.Matricula = readStr();
 		try {
-			aluno.save();
+			aluno.save(Aluno.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		TelaPrincipal();
 
 	}
-	
+
+	public static Aluno TelaRemoverAluno() {
+		Aluno aluno = null;
+		System.out.println("SisCol - Sistema Escolar - Remover Aluno\n");
+		System.out.println("Digite o nome do aluno\n");
+		String nome = readStr();
+		@SuppressWarnings("unchecked")
+		List<Aluno> alunos = (List<Aluno>) (List<?>) Aluno.find(Aluno.class, "Nome", nome);
+		if (alunos != null && alunos.size() != 0) {
+			alunos.get(0).delete(Aluno.class);
+			aluno = alunos.get(0);
+		} else {
+			System.out.println("Aluno não encontrado.");
+			System.out.println("Pressione qualquer tecla para continuar.");
+			readStr();
+		}
+		TelaPrincipal();
+		return aluno;
+	}
+
+	public static Diretor TelaRemoverDiretor() {
+		Diretor diretor = null;
+		System.out.println("SisCol - Sistema Escolar - Remover Diretor\n");
+		System.out.println("Digite o nome do diretor\n");
+		String nome = readStr();
+		@SuppressWarnings("unchecked")
+		List<Diretor> diretores = (List<Diretor>) (List<?>) Diretor.find(Diretor.class, "Nome", nome);
+		if (diretores != null && diretores.size() != 0) {
+			diretores.get(0).delete(Diretor.class);
+			diretor = diretores.get(0);
+
+		} else {
+			System.out.println("Diretor não encontrado.");
+			System.out.println("Pressione qualquer tecla para continuar.");
+			readStr();
+		}
+		TelaPrincipal();
+		return diretor;
+	}
+
+	public static Professor TelaRemoverProfessor() {
+		Professor professor = null;
+		System.out.println("SisCol - Sistema Escolar - Remover Professor\n");
+		System.out.println("Digite o nome do professor\n");
+		String nome = readStr();
+		@SuppressWarnings("unchecked")
+		List<Professor> professores = (List<Professor>) (List<?>) Professor.find(Professor.class, "Nome", nome);
+		if (professores != null && professores.size() != 0) {
+			professores.get(0).delete(Professor.class);
+			professor = professores.get(0);
+
+		} else {
+			System.out.println("Professor não encontrado.");
+			System.out.println("Pressione qualquer tecla para continuar.");
+			readStr();
+		}
+		TelaPrincipal();
+		return professor;
+	}
+
+	public static Funcionario TelaRemoverFuncionario() {
+		Funcionario funcionario = null;
+		System.out.println("SisCol - Sistema Escolar - Remover Funcionario\n");
+		System.out.println("Digite o nome do funcionario\n");
+		String nome = readStr();
+		@SuppressWarnings("unchecked")
+		List<Funcionario> funcionarios = (List<Funcionario>) (List<?>) Funcionario.find(Funcionario.class, "Nome",
+				nome);
+		if (funcionarios != null && funcionarios.size() != 0) {
+			funcionarios.get(0).delete(Funcionario.class);
+			funcionario = funcionarios.get(0);
+		} else {
+			System.out.println("Funcionario não encontrado.");
+			System.out.println("Pressione qualquer tecla para continuar.");
+			readStr();
+		}
+		TelaPrincipal();
+		return funcionario;
+	}
+
 	public static void TelaCadastrarDiretor() {
 		Diretor diretor = new Diretor();
 		System.out.println("SisCol - Sistema Escolar - Cadastrar Diretor\n");
@@ -122,13 +306,13 @@ public class GraphicalInterface {
 		System.out.println("Endereço:");
 		diretor.Endereco = readStr();
 		try {
-			diretor.save();
+			diretor.save(Diretor.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		TelaPrincipal();
 	}
-	
+
 	public static void TelaCadastrarProfessor() {
 		Professor professor = new Professor();
 		System.out.println("SisCol - Sistema Escolar - Cadastrar Professor\n");
@@ -141,14 +325,13 @@ public class GraphicalInterface {
 		System.out.println("Titulação:");
 		professor.Titulacao = readStr();
 		try {
-			professor.save();
+			professor.save(Professor.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		TelaPrincipal();
 	}
-	
-	
+
 	public static void TelaCadastrarFuncionario() {
 		Funcionario funcionario = new Funcionario();
 		System.out.println("SisCol - Sistema Escolar - Cadastrar Funcionario\n");
@@ -161,11 +344,27 @@ public class GraphicalInterface {
 		System.out.println("Cargo:");
 		funcionario.Cargo = readStr();
 		try {
-			funcionario.save();
+			funcionario.save(Funcionario.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		TelaPrincipal();
+	}
+
+	public static void TelaCadastrarDisciplina() {
+		Disciplina disciplina = new Disciplina();
+		System.out.println("SisCol - Sistema Escolar - Cadastrar Disciplina\n");
+		System.out.println("Nome:");
+		disciplina.Nome = readStr();
+		System.out.println("Quantidade de alunos:");
+		disciplina.qtdTotalAlunos = readInt();
+		try {
+			disciplina.save(Disciplina.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		TelaPrincipal();
+
 	}
 
 	public static String readStr() {

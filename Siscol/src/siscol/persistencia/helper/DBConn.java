@@ -80,6 +80,7 @@ public class DBConn {
 		}
 		return ms;
 	}
+	
 
 	public List<Model> find(Class c,int operator, String arg, String value) throws SQLException {
 		List<Model> ms;

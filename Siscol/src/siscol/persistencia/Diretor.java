@@ -19,6 +19,11 @@ public class Diretor extends Model implements Serializable {
 
 	public Diretor(){}
 
+	@Override
+	public String toString() {
+		return "Diretor [Nome=" + Nome + ", RG=" + RG + ", Endereco=" + Endereco + ", Cargo=" + Cargo + "]";
+	}
+
 
 }
 

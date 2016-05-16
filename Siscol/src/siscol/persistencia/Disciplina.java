@@ -13,9 +13,16 @@ public class Disciplina extends Model implements Serializable {
 	public int Turma;
 	@DatabaseField
 	public int qtdTotalAlunos;
-	@DatabaseField(foreign = true)
+	@DatabaseField(foreign = true,columnName="professor_id")
 	public Professor professor;
 
 	public Disciplina() {
 	}
+
+	@Override
+	public String toString() {
+		return "Disciplina [Nome=" + Nome + ", Turma=" + Turma + ", qtdTotalAlunos=" + qtdTotalAlunos + ", professor="+ professor + "]";
+	}
+	
+	
 }

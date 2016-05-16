@@ -19,11 +19,14 @@ public abstract class Model implements Serializable {
 	@DatabaseField(generatedId = true)
     public int id;
 	
-	public boolean save() {
+	@DatabaseField
+	public boolean inativo;
+	
+	public boolean save(Class c) {
 		// Updating date when object was updated.
 		DBConn dbConn = new DBConn();
 		try {
-			dbConn.createIfNotExists(Aluno.class,this);
+			dbConn.createIfNotExists(c,this);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

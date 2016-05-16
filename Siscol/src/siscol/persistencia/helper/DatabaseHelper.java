@@ -12,6 +12,7 @@ import siscol.persistencia.Diretor;
 import siscol.persistencia.Disciplina;
 import siscol.persistencia.Funcionario;
 import siscol.persistencia.Model;
+import siscol.persistencia.Notas;
 import siscol.persistencia.Professor;
 
 /**
@@ -35,6 +36,7 @@ public class DatabaseHelper{
 			TableUtils.createTableIfNotExists(getConnectionSource(), Disciplina.class);
 			TableUtils.createTableIfNotExists(getConnectionSource(), Funcionario.class);
 			TableUtils.createTableIfNotExists(getConnectionSource(), Professor.class);
+			TableUtils.createTableIfNotExists(getConnectionSource(), Notas.class);
 			
 			
 		} catch (SQLException e) {

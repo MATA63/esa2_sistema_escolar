@@ -19,6 +19,13 @@ public class Funcionario extends Model implements Serializable {
 
 	public Funcionario(){}
 
+	@Override
+	public String toString() {
+		return "Funcionario [Nome=" + Nome + ", RG=" + RG + ", Endereco=" + Endereco + ", Cargo=" + Cargo + "]";
+	}
+	
+	
+
 
 }
 

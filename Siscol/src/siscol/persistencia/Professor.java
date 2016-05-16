@@ -23,4 +23,11 @@ public class Professor extends Model implements Serializable {
 	public Professor() {
 	}
 
+	@Override
+	public String toString() {
+		return "Professor [Nome=" + Nome + ", RG=" + RG + ", Endereco=" + Endereco + ", Titulacao=" + Titulacao+ ", disciplina=" + disciplina + ", Cargo=" + Cargo + "]";
+	}
+	
+	
+
 }
