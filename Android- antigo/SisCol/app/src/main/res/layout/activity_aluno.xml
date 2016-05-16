@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/rel_nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/standard_top_bottom_margin"
+        android:background="@drawable/background_block"
+        android:orientation="vertical"
+        android:padding="@dimen/standard_top_bottom_margin">
+
+        <TextView
+            android:id="@+id/label_nome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:text="@string/nome"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edt_txt_value_nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/label_nome"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:enabled="false"
+            android:paddingBottom="@dimen/between_components_2x"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@drawable/edit_text_colors" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_rg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/standard_top_bottom_margin"
+        android:background="@drawable/background_block"
+        android:orientation="vertical"
+        android:padding="@dimen/standard_top_bottom_margin">
+
+        <TextView
+            android:id="@+id/label_rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:text="@string/rg"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edt_txt_value_rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/label_rg"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:enabled="false"
+            android:paddingBottom="@dimen/between_components_2x"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@drawable/edit_text_colors" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_matricula"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/standard_top_bottom_margin"
+        android:background="@drawable/background_block"
+        android:orientation="vertical"
+        android:padding="@dimen/standard_top_bottom_margin">
+
+        <TextView
+            android:id="@+id/label_matricula"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:text="@string/matricula"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edt_txt_value_matricula"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/label_matricula"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:enabled="false"
+            android:paddingBottom="@dimen/between_components_2x"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@drawable/edit_text_colors" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/buttonSalvar"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="@string/salvar" />
+
+</LinearLayout>
