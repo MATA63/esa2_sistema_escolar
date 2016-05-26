@@ -137,7 +137,7 @@ public abstract class Model implements Serializable {
 		DBConn dbConn = new DBConn();
 		inativo = true;
 		try {
-			dbConn.update(c,this);
+			dbConn.delete(c,this);
 			dbConn.close();
 			return true;
 		} catch (SQLException e) {

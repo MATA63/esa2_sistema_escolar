@@ -47,7 +47,7 @@ public class DBConn {
 		if (m != null) {
 			Dao<Model, Integer> dao = getDao(c);
 			DeleteBuilder<Model, Integer> deleteBuilder = dao.deleteBuilder();
-			// deleteBuilder.where().eq(Model.ID, m.id)
+			//deleteBuilder.where().eq(columnName, value)
 			deleteBuilder.delete();
 		}
 	}

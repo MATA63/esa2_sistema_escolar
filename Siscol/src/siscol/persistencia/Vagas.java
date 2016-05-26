@@ -9,7 +9,7 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Vagas extends Model implements Serializable {
 
 	@DatabaseField
-	private int vagasTotal;
+	public int vagasTotal;
 	@DatabaseField
 	public int vagasDisponivel;
 	

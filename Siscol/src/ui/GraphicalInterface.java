@@ -3,16 +3,21 @@ package ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.List;
 
-import siscol.persistencia.Aluno;
-import siscol.persistencia.Diretor;
-import siscol.persistencia.Disciplina;
-import siscol.persistencia.Funcionario;
-import siscol.persistencia.Notas;
-import siscol.persistencia.Professor;
-import siscol.persistencia.Sala;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.DeleteBuilder;
+
+import siscol.persistencia.*;
 import siscol.persistencia.helper.DBConn;
+
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.dao.GenericRawResults;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.Where;
+
 
 public class GraphicalInterface {
 
@@ -35,6 +40,9 @@ public class GraphicalInterface {
 	private static final int OPT_CADASTRAR_SALA = 17;
 	private static final int OPT_LISTAR_SALA = 18;
 	private static final int OPT_REMOVER_SALA = 19;
+	private static final int OPT_CADASTRAR_TURMA = 20;
+	private static final int OPT_LISTAR_TURMA = 21;
+	
 	
 	private static int opt;
 	private static DBConn conn;
@@ -70,8 +78,13 @@ public class GraphicalInterface {
 		System.out.println("\t" + OPT_LANCAR_NOTA + ".Lançar nota.");
 		System.out.println("Salas:");
 		System.out.println("\t" + OPT_LISTAR_SALA + ".Listar salas");
-		System.out.println("\t" + OPT_CADASTRAR_SALA + ".Cadastrar nova salas");
+		System.out.println("\t" + OPT_CADASTRAR_SALA + ".Cadastrar nova sala");
 		System.out.println("\t" + OPT_REMOVER_SALA + ".Remover salas");
+		System.out.println("Turmas:");
+		System.out.println("\t" + OPT_CADASTRAR_TURMA + ".Cadastrar nova turma");
+		System.out.println("\t" + OPT_LISTAR_TURMA + ".Listar turmas");
+
+		System.out.print("Selecione opcao: ");
 		opt = readInt();
 		selecionaOpcao();
 
@@ -92,7 +105,12 @@ public class GraphicalInterface {
 			TelaCadastrarAluno();
 			break;
 		case OPT_REMOVER_ANULO:
-			TelaRemoverAluno();
+			try {
+				TelaRemoverAluno();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 
 		case OPT_LISTAR_PROFESSORES:
@@ -159,7 +177,7 @@ public class GraphicalInterface {
 				System.out.println("Pressione qualquer tecla para continuar.");
 				readStr();
 			} else {
-				System.out.println("Aluno não encontrado.");
+				System.out.println("Aluno nao encontrado.");
 				System.out.println("Pressione qualquer tecla para continuar.");
 				readStr();
 			}
@@ -182,7 +200,26 @@ public class GraphicalInterface {
 		case OPT_REMOVER_SALA:
 			TelaRemoverSalas();
 			break;
-
+		case OPT_CADASTRAR_TURMA:
+			TelaCadastrarTurmas();
+			break;
+		case OPT_LISTAR_TURMA:
+			List<Turma> turmaLista = (List<Turma>) (List<?>) Turma.findAll(Turma.class);
+			if (turmaLista != null && turmaLista.size() != 0) {
+				List<Sala> salasLista = (List<Sala>) (List<?>) Sala.find(Sala.class, "sala_id",
+						String.valueOf(turmaLista.get(0).id));
+				for (Sala sala : salasLista)
+					System.out.println(sala);
+				System.out.println("Pressione qualquer tecla para continuar.");
+				readStr();
+			} else {
+				System.out.println("turma nao encontrado.");
+				System.out.println("Pressione qualquer tecla para continuar.");
+				readStr();
+			}
+			TelaPrincipal();
+			break;
+			
 		default:
 			System.out.println("Opção inválida.");
 			System.out.println("Pressione qualquer tecla para continuar.");
@@ -208,12 +245,12 @@ public class GraphicalInterface {
 				nota.valor = readInt();
 				nota.save(Notas.class);
 			} else {
-				System.out.println("Disciplina não encontrada.");
+				System.out.println("Disciplina nao encontrada.");
 				System.out.println("Pressione qualquer tecla para continuar.");
 				readStr();
 			}
 		} else {
-			System.out.println("Aluno não encontrado.");
+			System.out.println("Aluno nao encontrado.");
 			System.out.println("Pressione qualquer tecla para continuar.");
 			readStr();
 		}
@@ -239,7 +276,7 @@ public class GraphicalInterface {
 
 	}
 
-	public static Aluno TelaRemoverAluno() {
+	public static Aluno TelaRemoverAluno() throws SQLException {
 		Aluno aluno = null;
 		System.out.println("SisCol - Sistema Escolar - Remover Aluno\n");
 		System.out.println("Digite o nome do aluno\n");
@@ -250,7 +287,7 @@ public class GraphicalInterface {
 			alunos.get(0).delete(Aluno.class);
 			aluno = alunos.get(0);
 		} else {
-			System.out.println("Aluno não encontrado.");
+			System.out.println("Aluno nao encontrado.");
 			System.out.println("Pressione qualquer tecla para continuar.");
 			readStr();
 		}
@@ -270,7 +307,7 @@ public class GraphicalInterface {
 			diretor = diretores.get(0);
 
 		} else {
-			System.out.println("Diretor não encontrado.");
+			System.out.println("Diretor nao encontrado.");
 			System.out.println("Pressione qualquer tecla para continuar.");
 			readStr();
 		}
@@ -290,7 +327,7 @@ public class GraphicalInterface {
 			professor = professores.get(0);
 
 		} else {
-			System.out.println("Professor não encontrado.");
+			System.out.println("Professor nao encontrado.");
 			System.out.println("Pressione qualquer tecla para continuar.");
 			readStr();
 		}
@@ -310,7 +347,7 @@ public class GraphicalInterface {
 			funcionarios.get(0).delete(Funcionario.class);
 			funcionario = funcionarios.get(0);
 		} else {
-			System.out.println("Funcionario não encontrado.");
+			System.out.println("Funcionario nao encontrado.");
 			System.out.println("Pressione qualquer tecla para continuar.");
 			readStr();
 		}
@@ -449,4 +486,34 @@ public class GraphicalInterface {
 		TelaPrincipal();
 		return sala;
 	}
+
+	private static void TelaCadastrarTurmas() {
+		System.out.print("Numero da turma: ");
+		Turma turma = new Turma();
+		turma.NumTurma = readStr();
+		
+		System.out.print("Numero da sala: ");
+		List<Sala> salaLista = (List<Sala>) (List<?>) Sala.find(Sala.class, "numero", readStr());
+		if (salaLista != null && salaLista.size() != 0) {
+			System.out.print("Nome da disciplina: ");
+			turma.sala = salaLista.get(0);
+			List<Disciplina> disciplinaLista = (List<Disciplina>) (List<?>) Disciplina.find(Disciplina.class, "Nome", readStr());
+			if (disciplinaLista != null && disciplinaLista.size() != 0) {
+				turma.disciplina = disciplinaLista.get(0);
+				turma.save(Turma.class);
+			} else {
+				System.out.println("Disciplina nao encontrada.");
+				System.out.println("Pressione qualquer tecla para continuar.");
+				readStr();
+			}
+		} else {
+			System.out.println("Sala nao encontrado.");
+			System.out.println("Pressione qualquer tecla para continuar.");
+			readStr();
+		}
+		TelaPrincipal();
+
+	}
+
+
 }
