@@ -11,6 +11,7 @@ import siscol.persistencia.Disciplina;
 import siscol.persistencia.Funcionario;
 import siscol.persistencia.Notas;
 import siscol.persistencia.Professor;
+import siscol.persistencia.Sala;
 import siscol.persistencia.helper.DBConn;
 
 public class GraphicalInterface {
@@ -31,7 +32,10 @@ public class GraphicalInterface {
 	private static final int OPT_CADASTRAR_DISCIPLINA = 14;
 	private static final int OPT_LISTAR_NOTAS = 15;
 	private static final int OPT_LANCAR_NOTA = 16;
-
+	private static final int OPT_CADASTRAR_SALA = 17;
+	private static final int OPT_LISTAR_SALA = 18;
+	private static final int OPT_REMOVER_SALA = 19;
+	
 	private static int opt;
 	private static DBConn conn;
 
@@ -42,28 +46,32 @@ public class GraphicalInterface {
 
 	public static void TelaPrincipal() {
 		System.out.println("SisCol - Sistema Escolar");
-		System.out.println("Alunos");
+		System.out.println("Alunos:");
 		System.out.println("\t" + OPT_LISTAR_ALUNO + ".Listar alunos");
 		System.out.println("\t" + OPT_CADASTRAR_ALUNO + ".Cadastrar novo aluno");
 		System.out.println("\t" + OPT_REMOVER_ANULO + ".Remover aluno");
-		System.out.println("Professores");
+		System.out.println("Professores:");
 		System.out.println("\t" + OPT_LISTAR_PROFESSORES + ".listar professores");
 		System.out.println("\t" + OPT_CADASTRAR_PROFESSOR + ".Cadastrar novo professor");
 		System.out.println("\t" + OPT_REMOVER_PROFESSOR + ".Remover professor.");
-		System.out.println("Diretores");
+		System.out.println("Diretores:");
 		System.out.println("\t" + OPT_LISTAR_DIRETORES + ".Listar diretores");
 		System.out.println("\t" + OPT_CADASTRAR_DIRETOR + ".Cadastrar novo diretor");
 		System.out.println("\t" + OPT_REMOVER_DIRETOR + ".Remover diretor");
-		System.out.println("Funcionários");
+		System.out.println("Funcionários:");
 		System.out.println("\t" + OPT_LISTAR_FUNCIONARIO + ".Listar funcionários");
 		System.out.println("\t" + OPT_CADASTRAR_FUNCIONARIO + ".Cadastrar novo funcionário");
 		System.out.println("\t" + OPT_REMOVER_FUNCIONARIO + ".Remover funcionário");
-		System.out.println("Disciplinas");
+		System.out.println("Disciplinas:");
 		System.out.println("\t" + OPT_LISTAR_DISCIPLINA + ".Listar disciplinas.");
 		System.out.println("\t" + OPT_CADASTRAR_DISCIPLINA + ".Cadastrar nova disciplina.");
-		System.out.println("Notas");
+		System.out.println("Notas:");
 		System.out.println("\t" + OPT_LISTAR_NOTAS + ".Listar notas.");
 		System.out.println("\t" + OPT_LANCAR_NOTA + ".Lançar nota.");
+		System.out.println("Salas:");
+		System.out.println("\t" + OPT_LISTAR_SALA + ".Listar salas");
+		System.out.println("\t" + OPT_CADASTRAR_SALA + ".Cadastrar nova salas");
+		System.out.println("\t" + OPT_REMOVER_SALA + ".Remover salas");
 		opt = readInt();
 		selecionaOpcao();
 
@@ -159,6 +167,20 @@ public class GraphicalInterface {
 			break;
 		case OPT_LANCAR_NOTA:
 			TelaLancarNota();
+			break;
+		case OPT_LISTAR_SALA:
+			List<Sala> salas = (List<Sala>) (List<?>) Sala.findAll(Sala.class);
+			for (Sala s : salas)
+				System.out.println(s);
+			System.out.println("Pressione qualquer tecla para continuar.");
+			readStr();
+			TelaPrincipal();
+			break;
+		case OPT_CADASTRAR_SALA:
+			TelaCadastrarSalas();
+			break;
+		case OPT_REMOVER_SALA:
+			TelaRemoverSalas();
 			break;
 
 		default:
@@ -391,5 +413,40 @@ public class GraphicalInterface {
 		}
 		return 0;
 
+	}
+	
+	public static void TelaCadastrarSalas() {
+		Sala sala = new Sala();
+		System.out.println("SisCol - Sistema Escolar - Cadastrar Aluno\n");
+		System.out.println("Numero da sala:");
+		sala.numero = readInt();
+		System.out.println("Quantidade maxima de alunos:");
+		sala.qtdMaxima = readInt();
+		try {
+			sala.save(Sala.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		TelaPrincipal();
+
+	}
+
+	public static Sala TelaRemoverSalas() {
+		Sala sala = null;
+		System.out.println("SisCol - Sistema Escolar - Remover Sala\n");
+		System.out.println("Digite o numero do sala\n");
+		String numSala = readStr();
+		@SuppressWarnings("unchecked")
+		List<Sala> salas = (List<Sala>) (List<?>) Sala.find(Sala.class, "Numero", numSala);
+		if (salas != null && salas.size() != 0) {
+			salas.get(0).delete(Sala.class);
+			sala = salas.get(0);
+		} else {
+			System.out.println("Sala nao encontrada.");
+			System.out.println("Pressione qualquer tecla para continuar.");
+			readStr();
+		}
+		TelaPrincipal();
+		return sala;
 	}
 }

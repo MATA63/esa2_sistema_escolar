@@ -14,6 +14,7 @@ import siscol.persistencia.Funcionario;
 import siscol.persistencia.Model;
 import siscol.persistencia.Notas;
 import siscol.persistencia.Professor;
+import siscol.persistencia.Sala;
 
 /**
  * Database helper class used to manage the creation and upgrading of your database. This class also usually provides
@@ -37,7 +38,7 @@ public class DatabaseHelper{
 			TableUtils.createTableIfNotExists(getConnectionSource(), Funcionario.class);
 			TableUtils.createTableIfNotExists(getConnectionSource(), Professor.class);
 			TableUtils.createTableIfNotExists(getConnectionSource(), Notas.class);
-			
+			TableUtils.createTableIfNotExists(getConnectionSource(), Sala.class);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
